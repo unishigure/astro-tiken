@@ -1,0 +1,35 @@
+---
+import "@pagefind/default-ui/css/ui.css";
+---
+
+<div id="search"></div>
+
+<script>
+  import { PagefindUI } from "@pagefind/default-ui";
+  new PagefindUI({
+    element: "#search",
+    showImages: false,
+    showSubResults: true,
+  });
+</script>
+
+<style>
+  :root {
+    --pagefind-ui-primary: #eeeeee;
+    --pagefind-ui-text: #eeeeee;
+    --pagefind-ui-background: #16161d;
+    --pagefind-ui-border: #eeeeee;
+    --pagefind-ui-tag: #16161d;
+  }
+
+  #search {
+    transition-duration: 300ms;
+    background: #23262d;
+    border-radius: 8px;
+  }
+
+  #search:not(:has(.pagefind-ui__hidden)) {
+    padding: 16px;
+    border-radius: 16px;
+  }
+</style>
