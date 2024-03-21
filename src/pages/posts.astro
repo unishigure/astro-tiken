@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+
+import Layout from "@layouts/Layout.astro";
+import BlogPost from "@components/BlogPost.astro";
+
+import tikenImg from "@assets/tiken.png";
+
+const allPosts = await Astro.glob("../pages/posts/*.md");
+const title = "Blog";
+---
+
+<Layout title={title + " - UniNote"}>
+  <h1>{title}</h1>
+  <p>
+    <Image
+      src={tikenImg}
+      alt="tiken"
+      width={32}
+      height={32}
+      style={"vertical-align: middle"}
+      loading="eager"
+    />の書き散らしどころ
+  </p>
+  <menu>
+    {
+      allPosts
+        .sort((a, b) => {
+          return a.frontmatter.pubDate < b.frontmatter.pubDate ? 1 : -1;
+        })
+        .map((post) => <BlogPost post={post} />)
+    }
+  </menu>
+</Layout>
+
+<style>
+  menu {
+    display: contents;
+  }
+</style>

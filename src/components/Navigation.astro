@@ -1,0 +1,59 @@
+---
+
+---
+
+<div class="nav-links">
+  <a href="/">Home</a>
+  <a href="/about/">About</a>
+  <a href="/posts/">Blog</a>
+  <a href="/tags/">Tags</a>
+</div>
+
+<script>
+  import "../scripts/menu.js";
+</script>
+
+<style>
+  .nav-links {
+    width: 100%;
+    top: 5rem;
+    left: 48px;
+    margin: 0;
+    display: none;
+  }
+
+  .nav-links a {
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus {
+    background-color: #8a00004a;
+    border-radius: 8px;
+  }
+
+  .expanded {
+    display: unset;
+  }
+
+  @media screen and (min-width: 636px) {
+    .nav-links {
+      margin-left: 5em;
+      display: contents;
+      position: static;
+      width: auto;
+      background: none;
+    }
+
+    .nav-links a {
+      display: inline-block;
+      padding: 15px 20px;
+    }
+  }
+</style>

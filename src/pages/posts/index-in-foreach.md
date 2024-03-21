@@ -1,0 +1,27 @@
+---
+layout: ../../layouts/PostLayout.astro
+title: forEach() 内で index を使う
+description: "いい感じに forEach() をする"
+pubDate: 2023-09-27
+tags: ["Java"]
+---
+
+[`Iterable<T>.forEach()`](<https://docs.oracle.com/javase/jp/17/docs/api/java.base/java/lang/Iterable.html#forEach(java.util.function.Consumer)>) や [`Stream<T>.forEach()`](<https://docs.oracle.com/javase/jp/17/docs/api/java.base/java/util/stream/Stream.html#forEach(java.util.function.Consumer)>) などには、通常の`for`文のような`index`はない
+
+その代わり、以下のように [`IntStream.range()`](<https://docs.oracle.com/javase/jp/17/docs/api/java.base/java/util/stream/IntStream.html#range(int,int)>) から [`foreach()`](<https://docs.oracle.com/javase/jp/17/docs/api/java.base/java/util/stream/IntStream.html#forEach(java.util.function.IntConsumer)>) に繋げることで、いい感じに`index`を用意することができる\
+ただし、`list`の内容は別途変数に格納する必要がある
+
+```java
+IntStream.range(0, list.size()).foreach(index -> {
+  SomeDto dto = list.get(index);
+  // something to do
+});
+```
+
+## Ref
+
+- [Java の forEach でインデックスを使用する | Delft スタック](https://www.delftstack.com/ja/howto/java/java-foreach-with-index/)
+
+## Base
+
+[2023/7/14 13:20:12 の Note - Misskey.io](https://misskey.io/notes/9h5mxaox0y)

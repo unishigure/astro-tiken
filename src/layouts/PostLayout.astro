@@ -1,0 +1,48 @@
+---
+import Layout from "@layouts/Layout.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title + " - UniNote"}>
+  <h1>{frontmatter.title}</h1>
+  <p class="pub-date">Last updated: {frontmatter.pubDate.slice(0, 10)}</p>
+  <p>{frontmatter.description}</p>
+  <div class="tags">
+    {
+      frontmatter.tags.map((tag: string) => (
+        <p class="tag">
+          <a href={`/tags/${tag}`}>#{tag}</a>
+        </p>
+      ))
+    }
+  </div>
+  <slot />
+</Layout>
+
+<style>
+  .pub-date {
+    font-size: 0.9em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    .tag {
+      margin: 0;
+      padding: 0 1em;
+      border: thin solid gray;
+      border-radius: 16px;
+    }
+
+    .tag:hover {
+      background-color: #600000;
+      transition: background-color 0.25s;
+    }
+  }
+</style>

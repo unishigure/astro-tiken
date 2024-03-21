@@ -1,0 +1,205 @@
+---
+layout: ../../layouts/PostLayout.astro
+title: "Python の開発環境を構築する"
+description: "最低限の環境構築手順をまとめる"
+pubDate: 2023-11-24
+tags: ["Python", "環境構築"]
+---
+
+## Overview
+
+Python するか…となったとき、毎回全てを忘却していて調べ直すので、最低限の環境構築手順をまとめておく
+
+## Flow
+
+### Python のインストール
+
+Python の [公式ページ](https://www.python.org/) からダウンロードしてインストールする
+
+途中、環境変数に追加する旨のオプションを選択するのを忘れない\
+`Add Python 3.x to PATH` とか `Add Python to environment variables` とか\
+地味に文言が変わっている
+
+`python` コマンドで MS Store に飛ばされなければ完了
+
+```ps
+python
+```
+
+```ps
+py
+```
+
+大体 pip が更新されているので、ついでに更新する
+
+```ps
+pip install --upgrade pip
+```
+
+### 仮想環境の作成
+
+プロジェクトディレクトリを作成し、カレントディレクトリにする
+
+```ps
+ni -type dir <project_name> | cd
+```
+
+---
+
+#### venv
+
+Python 標準モジュールの [venv](https://docs.python.org/ja/3/library/venv.html) で仮想環境を作成する場合
+
+##### 環境作成
+
+仮想環境を作成\
+末尾のファイル名は任意
+
+```ps
+py -m venv .env
+```
+
+git から除外したいときは、仮想環境ディレクトリ下に `.gitignore` も作成しておく
+
+```ps
+ni .env/.gitignore -V "*"
+```
+
+仮想環境を有効化\
+ターミナルの行先頭に `(.env)` のように仮想環境ディレクトリ名が表示される
+
+```ps
+./.env/Scripts/activate
+```
+
+任意のパッケージをインストール
+
+```ps
+pip install <target_package>
+```
+
+インストールされているパッケージの一覧を確認
+
+```ps
+pip list
+```
+
+仮想環境を終了
+
+```ps
+deactivate
+```
+
+##### パッケージ管理ファイルの作成
+
+`requirements.txt` にインストールされているパッケージ一覧が出力される
+
+```ps
+pip freeze > requirements.txt
+```
+
+`requirements.txt` からパッケージを一括インストール
+
+```ps
+pip install -r requirements.txt
+```
+
+---
+
+#### Pipenv
+
+Python 依存関係管理ツールの [Pipenv](https://pipenv.pypa.io/) で仮想環境を作成する場合
+
+##### Pipenv のインストール
+
+```ps
+pip install --user pipenv
+```
+
+##### パッケージのインストール
+
+パッケージのインストール時、`Pipfile` と仮想環境がなければ同時に生成される
+
+任意のパッケージをインストール
+
+```ps
+pipenv install <target_package>
+```
+
+開発時にのみ使用する、任意のパッケージをインストール
+
+```ps
+pipenv install --dev <target_package>
+```
+
+##### Python プログラムの実行
+
+生成された仮想環境を使って、Python プログラムを実行する
+
+```ps
+pipenv run py <target_python_file>
+```
+
+または、生成された仮想環境内に shell を起動して、プログラムを実行する
+
+```ps
+pipenv shell
+```
+
+```ps
+py <target_python_file>
+```
+
+仮想環境内の shell を終了する
+
+```ps
+exit
+```
+
+##### 仮想環境の管理
+
+デフォルトでは、仮想環境は共通のディレクトリに生成される\
+プロジェクトディレクトリ直下に生成したい場合は、環境変数に `PIPENV_VENV_IN_PROJECT=1` を設定しておく
+
+`Pipfile` から仮想環境を生成する\
+`Pipfile.lock` がある場合は、優先的に参照される
+
+```ps
+pipenv install
+```
+
+`Pipfile` から開発用の仮想環境を生成する
+
+```ps
+pipenv install --dev
+```
+
+仮想環境のパスを表示する
+
+```ps
+pipenv --venv
+```
+
+仮想環境を削除する
+
+```ps
+pipenv --rm
+```
+
+`Pipfile` を `requirements.txt` に変換する
+
+```ps
+pipenv lock -r
+```
+
+## Afterword
+
+個人で使う分にはどちらでも良いかな\
+チームで環境を共有したいようなときには、Pipenv の方が使いやすいかも
+
+## Ref
+
+- [Python 環境構築ガイド - python.jp](https://www.python.jp/install/install.html)
+- [Python と venv で仮想環境の構築から環境の複製・配布の流れ │Tatsuya Note](https://tatsuya-note.com/python-venv-build-and-share/)
+- [Pipenv: 人間のための Python 開発ワークフロー](https://pipenv-ja.readthedocs.io/)
+- [Pipenv の基本的な使い方 — pipenv](https://pipenv-ja.readthedocs.io/ja/translate-ja/basics.html#general-recommendations-version-control)

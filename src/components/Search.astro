@@ -11,7 +11,7 @@ import "@pagefind/default-ui/css/ui.css";
     showImages: false,
     showSubResults: true,
     translations: {
-      placeholder: "Search",
+      placeholder: "Search my website",
       clear_search: "Clear",
       load_more: "Load more results",
       search_label: "Search this site",
@@ -32,9 +32,9 @@ import "@pagefind/default-ui/css/ui.css";
   :root {
     --pagefind-ui-primary: #eeeeee;
     --pagefind-ui-text: #eeeeee;
-    --pagefind-ui-background: #16161d;
+    --pagefind-ui-background: #282828;
     --pagefind-ui-border: #eeeeee;
-    --pagefind-ui-tag: #16161d;
+    --pagefind-ui-tag: #282828;
   }
 
   #search {
@@ -44,7 +44,10 @@ import "@pagefind/default-ui/css/ui.css";
   }
 
   #search:not(:has(.pagefind-ui__hidden)) {
-    padding: 16px;
-    border-radius: 16px;
+    padding-bottom: 0.5em;
+
+    .pagefind-ui__results-area {
+      padding: 0 1em;
+    }
   }
 </style>

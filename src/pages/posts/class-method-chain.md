@@ -1,0 +1,45 @@
+---
+layout: ../../layouts/PostLayout.astro
+title: "クラスのメソッドチェーン化"
+description: "DTO クラスをいい感じにする"
+pubDate: 2023-09-27
+tags: ["Java"]
+---
+
+DTO クラスをいい感じにするのにメソッドチェーン化を学んだ
+
+コンストラクタのかわりに`create()`を用意し、\
+`set`関数に自身を返させるといい感じに連結することが出来て良い
+
+後からフィールドが増えても、コンストラクタの修正などが発生しないのも良い
+
+```java showLineNumbers {4-6,10}
+class User{
+  private Integer id;
+
+  public static User create(){
+    return new User();
+  }
+
+  public User setId(Integer id){
+    this.id = id;
+    return this;
+  }
+}
+```
+
+```java showLineNumbers
+public class Main {
+  public static void main(String[] args) {
+    User user = User.create().setId(1);
+  }
+}
+```
+
+## Ref
+
+- [コンストラクタの正しい使い方](https://www.deep-rain.com/programming/java/915)
+
+## Base
+
+[2023/7/10 12:42:15 の Note - Misskey.io](https://misskey.io/notes/9gzvt3eaig)

@@ -1,0 +1,127 @@
+---
+import { Image } from "astro:assets";
+
+import Layout from "@layouts/Layout.astro";
+import OuterLink from "@components/OuterLink.astro";
+
+import "devicon";
+import tikenImg from "@assets/tiken.png";
+import marieIconImg from "@assets/marie_bg.png";
+
+const title = "About";
+---
+
+<Layout title={title + " - UniNote"}>
+  <h1>{title}</h1>
+
+  <p>
+    日常で得た<Image
+      src={tikenImg}
+      alt="tiken"
+      width={32}
+      height={32}
+      style={"vertical-align: middle"}
+      loading="eager"
+    />を書き散らしていくサイト
+  </p>
+
+  <p>
+    <OuterLink
+      url="https://nextra.site/"
+      text="Nextra"
+    />で作っていたブログを<OuterLink
+      url="https://astro.build/"
+      text="Astro"
+    />で作ったブログに移行しています
+  </p>
+
+  <h2>Thanks</h2>
+  <ul>
+    <li>
+      Powered by <OuterLink url="https://astro.build/" text="Astro" /> and <OuterLink
+        url="https://vercel.com/"
+        text="Vercel"
+      />
+    </li>
+    <li>
+      Font "<OuterLink
+        url="https://fonts.google.com/noto/specimen/Noto+Sans+JP"
+        text="Noto Sans Japanese"
+      />" by <OuterLink url="https://fonts.google.com/" text="Google Fonts" />
+    </li>
+    <li>
+      Vectors and icon by <OuterLink
+        url="https://www.svgrepo.com/"
+        text="SVG Repo"
+      />
+    </li>
+    <li>
+      Language icons by <OuterLink url="https://devicon.dev/" text="Devicon" />
+    </li>
+    <li>
+      Emoji by <OuterLink
+        url="https://emoji-gen.ninja/"
+        text="Emoji Generator"
+      />
+    </li>
+  </ul>
+
+  <h2>Author</h2>
+
+  <div id="marie-icon">
+    <Image src={marieIconImg} alt="Marie" loading="eager" />
+  </div>
+
+  <p class="profile">エンジニア(´・ω・｀)</p>
+
+  <div class="skills">
+    <h3>大学で学んだ</h3>
+    <i class="devicon-cplusplus-plain colored"></i>
+    <i class="devicon-java-plain-wordmark colored"></i>
+  </div>
+
+  <div class="skills">
+    <h3>仕事で使っている</h3>
+    <i class="devicon-java-plain-wordmark colored"></i>
+    <i class="devicon-python-plain colored"></i>
+    <i class="devicon-php-plain colored"></i>
+    <i class="devicon-javascript-plain colored"></i>
+  </div>
+
+  <div class="skills">
+    <h3>趣味で弄っている</h3>
+    <i class="devicon-typescript-plain colored"></i>
+    <i class="devicon-nextjs-original-wordmark"></i>
+    <i class="devicon-astro-plain colored"></i>
+  </div>
+
+  <style>
+    #marie-icon {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+      img {
+        width: 80vw;
+        height: 80vw;
+      }
+    }
+
+    .profile,
+    .skills {
+      text-align: center;
+    }
+
+    i {
+      font-size: 3rem;
+    }
+
+    @media screen and (min-width: 636px) {
+      #marie-icon {
+        img {
+          width: 300px;
+          height: 300px;
+        }
+      }
+    }
+  </style>
+</Layout>
