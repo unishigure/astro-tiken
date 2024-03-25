@@ -12,10 +12,10 @@
     "@astrojs/rss": "^4.0.5",
     "@fontsource-variable/noto-sans-jp": "^5.0.18",
     "@pagefind/default-ui": "^1.0.4",
-    "astro": "^4.5.8",
+    "astro": "^4.5.9",
     "devicon": "^2.16.0",
     "pagefind": "^1.0.4",
-    "sharp": "^0.33.2",
+    "sharp": "^0.33.3",
     "typescript": "^5.4.3"
   }
 }
