@@ -21,8 +21,8 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
+    <Header />
     <main>
-      <Header />
       <slot />
     </main>
     <Footer />
@@ -61,6 +61,7 @@ const { title } = Astro.props;
 
     margin: auto;
     padding: 2rem;
+    padding-top: 0;
 
     font-size: 16px;
     line-height: 1.6;
@@ -88,5 +89,15 @@ const { title } = Astro.props;
     main {
       width: 800px;
     }
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #d4211175;
+    border-radius: 100px;
   }
 </style>
