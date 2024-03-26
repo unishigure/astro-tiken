@@ -6,7 +6,7 @@ const { frontmatter } = Astro.props;
 
 <Layout title={frontmatter.title + " - UniNote"}>
   <h1>{frontmatter.title}</h1>
-  <p class="pub-date">Last updated: {frontmatter.pubDate.slice(0, 10)}</p>
+  <p class="pub-date">Last updated: {frontmatter.publishDate.slice(0, 10)}</p>
   <p>{frontmatter.description}</p>
   <div class="tags">
     {

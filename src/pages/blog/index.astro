@@ -1,12 +1,13 @@
 ---
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 
 import Layout from "@layouts/Layout.astro";
 import BlogPost from "@components/BlogPost.astro";
 
 import tikenImg from "@assets/tiken.png";
 
-const allPosts = await Astro.glob("../pages/posts/*.md");
+const allPosts = await getCollection("blog");
 const title = "Blog";
 ---
 
@@ -26,7 +27,7 @@ const title = "Blog";
     {
       allPosts
         .sort((a, b) => {
-          return a.frontmatter.pubDate < b.frontmatter.pubDate ? 1 : -1;
+          return a.data.publishDate < b.data.publishDate ? 1 : -1;
         })
         .map((post) => <BlogPost post={post} />)
     }

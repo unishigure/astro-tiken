@@ -1,33 +1,25 @@
 ---
-import type {
-  InferGetStaticParamsType,
-  InferGetStaticPropsType,
-  GetStaticPaths,
-} from "astro";
-
+import { getCollection } from "astro:content";
 
 import Layout from "@layouts/Layout.astro";
 import BlogPost from "@components/BlogPost.astro";
 
-type Params = InferGetStaticParamsType<typeof getStaticPaths>;
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-
-export const getStaticPaths = (async () => {
-  const allPosts = await Astro.glob("../posts/*.md");
+export async function getStaticPaths() {
+  const allPosts = await getCollection("blog");
   const uniqueTags = [
-    ...new Set(allPosts.map((post) => post.frontmatter.tags).flat()),
+    ...new Set(allPosts.map((post) => post.data.tags).flat()),
   ];
 
   return uniqueTags.map((tag) => {
     const filteredPosts = allPosts.filter((post) =>
-      post.frontmatter.tags.includes(tag)
+      post.data.tags.includes(tag)
     );
     return {
       params: { tag },
       props: { posts: filteredPosts },
     };
   });
-}) satisfies GetStaticPaths;
+}
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
@@ -40,7 +32,7 @@ const { posts } = Astro.props;
     {
       posts
         .sort((a, b) => {
-          return a.frontmatter.pubDate < b.frontmatter.pubDate ? 1 : -1;
+          return a.data.pubDate < b.data.pubDate ? 1 : -1;
         })
         .map((post) => <BlogPost post={post} />)
     }

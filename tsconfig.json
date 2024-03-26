@@ -8,6 +8,7 @@
       "@assets/*": ["src/assets/*"],
       "@scripts/*": ["src/scripts/*"]
     },
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    "strictNullChecks": true
   }
 }

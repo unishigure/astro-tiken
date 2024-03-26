@@ -1,17 +1,31 @@
 ---
+import type { CollectionEntry } from "astro:content";
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
 const { post } = Astro.props;
 ---
 
 <li class="link-card">
-  <a href={post.url}>
+  <a href={`/blog/${post.slug}`}>
     <div class="pub-date">
-      {post.frontmatter.pubDate.slice(0, 10)}
+      {
+        post.data.publishDate
+          .toLocaleDateString("ja-JP", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          })
+          .split("/")
+          .join("-")
+      }
     </div>
     <h2>
-      {post.frontmatter.title}
+      {post.data.title}
     </h2>
     <p>
-      {post.frontmatter.description}
+      {post.data.description}
     </p>
   </a>
 </li>
